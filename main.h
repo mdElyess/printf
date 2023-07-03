@@ -43,9 +43,10 @@ typedef struct buffer_s
 typedef struct converter_s
 {
 	unsigned char specifier;
-	unsigned int (*func)(va_list, buffer_t *, unsigned char, int,
-			int, unsigned char);
+	unsigned int (*func)(va_list, buffer_t *,
+			unsigned char, int, int, unsigned char);
 } converter_t;
+
 /**
  * struct flag_s - A new type defining a flags struct.
  * @flag: A character representing a flag.
@@ -53,8 +54,8 @@ typedef struct converter_s
  */
 typedef struct flag_s
 {
-	unsigned char *flag;
-	unsigned int value;
+	unsigned char flag;
+	unsigned char value;
 } flag_t;
 
 int _printf(const char *format, ...);
@@ -99,7 +100,7 @@ unsigned int (*handle_specifiers(const char *specifier))(va_list, buffer_t *,
 unsigned int print_width(buffer_t *output, unsigned int printed,
 		unsigned char flags, int wid);
 unsigned int print_string_width(buffer_t *output,
-		unsigned char flag, int wid, int prec, int size);
+		unsigned char flags, int wid, int prec, int size);
 unsigned int print_neg_width(buffer_t *output, unsigned int printed,
 		unsigned char flags, int wid);
 
@@ -109,7 +110,7 @@ void free_buffer(buffer_t *output);
 unsigned int _memcpy(buffer_t *output, const char *src, unsigned int n);
 unsigned int convert_sbase(buffer_t *output, long int num, char *base,
 		unsigned char flags, int wid, int prec);
-unsigned int convert_ubase(buffer_t *output, unsigned long int num,
-		char *base, unsigned char flags, int wid, int prec);
+unsigned int convert_ubase(buffer_t *output, unsigned long int num, char *base,
+		unsigned char flags, int wid, int prec);
 
 #endif

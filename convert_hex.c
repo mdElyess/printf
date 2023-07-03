@@ -7,13 +7,13 @@ unsigned int convert_X(va_list args, buffer_t *output,
 
 /**
  * convert_x - Converts an unsigned int argument to hex using abcdef
- *		and stored it to a buffer contained in a struct.
+ *             and stores it to a buffer contained in a struct.
  * @args: A va_list pointing to the argument to be converted.
  * @flags: Flag modifiers.
  * @wid: A width modifier.
  * @prec: A precision modifier.
  * @len: A length modifier.
- * @output: A buffer_t struct containig a character array.
+ * @output: A buffer_t struct containing a character array.
  *
  * Return: The number of bytes stored to the buffer.
  */
@@ -28,29 +28,30 @@ unsigned int convert_x(va_list args, buffer_t *output,
 		num = va_arg(args, unsigned long int);
 	else
 		num = va_arg(args, unsigned int);
-
 	if (len == SHORT)
-		num = (unsigned short) num;
-	
+		num = (unsigned short)num;
+
 	if (HASH_FLAG == 1 && num != 0)
 		ret += _memcpy(output, lead, 2);
 
 	if (!(num == 0 && prec == 0))
 		ret += convert_ubase(output, num, "0123456789abcdef",
 				flags, wid, prec);
+
 	ret += print_neg_width(output, ret, flags, wid);
+
 	return (ret);
 }
 
 /**
  * convert_X - Converts an unsigned int argument to hex using ABCDEF
- *		and stored it to a buffer contained in a struct.
+ *             and stores it to a buffer contained in a struct.
  * @args: A va_list pointing to the argument to be converted.
  * @flags: Flag modifiers.
  * @wid: A width modifier.
  * @prec: A precision modifier.
  * @len: A length modifier.
- * @output: A buffer_t struct containig a character array.
+ * @output: A buffer_t struct containing a character array.
  *
  * Return: The number of bytes stored to the buffer.
  */
@@ -67,11 +68,15 @@ unsigned int convert_X(va_list args, buffer_t *output,
 		num = va_arg(args, unsigned int);
 	if (len == SHORT)
 		num = (unsigned short)num;
+
 	if (HASH_FLAG == 1 && num != 0)
 		ret += _memcpy(output, lead, 2);
-	if(!(num == 0 && prec == 0))
+
+	if (!(num == 0 && prec == 0))
 		ret += convert_ubase(output, num, "0123456789ABCDEF",
 				flags, wid, prec);
+
 	ret += print_neg_width(output, ret, flags, wid);
+
 	return (ret);
 }
